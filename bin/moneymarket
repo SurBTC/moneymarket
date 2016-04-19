@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+# TOOD: json-RPC mode
+# require 'moneymarket'
+# require 'moneymarket/cli'
