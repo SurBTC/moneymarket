@@ -8,6 +8,10 @@ module Moneymarket
     attr_reader :user, :volume, :limit, :fee, :ref
 
     def initialize(user: nil, status: NEW, volume: nil, limit: nil, fee: 0.0, ref: nil)
+      Assertions.valid_money volume
+      Assertions.valid_money limit unless limit.nil?
+      Assertions.valid_fee fee
+
       @user = user
       @status = status
       @volume = volume
@@ -29,11 +33,11 @@ module Moneymarket
     end
 
     def consume(_volume)
+      Assertions.valid_money _volume, currency: base_currency
       raise ArgumentError, 'cannot consume, order closed' if closed?
-      raise ArgumentError, 'amount to consume must be positive' if _volume < 0
       raise ArgumentError, 'trying to consume more than is available' if _volume > @volume
-      @volume -= _volume
 
+      @volume -= _volume
       @status = TRADED if @volume == 0
     end
 
