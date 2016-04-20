@@ -1,6 +1,7 @@
+require 'money'
+require 'aasm'
 require 'moneymarket/version'
 
-require 'money'
 require 'moneymarket/utils/assertions'
 require 'moneymarket/utils/calculator'
 require 'moneymarket/utils/command'
