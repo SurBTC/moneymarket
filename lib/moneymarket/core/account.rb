@@ -2,12 +2,15 @@ module Moneymarket
   class Account
     attr_reader :user, :currency, :total, :frozen, :ref
 
-    def initialize(_user, _currency, _total, _frozen, _ref = nil)
-      @user = _user
-      @currency = _currency
-      @total = _total
-      @frozen = _frozen
-      @ref = _ref
+    def initialize(user: nil, currency: nil, total: nil, frozen: nil, ref: nil)
+      Assertions.valid_money total, currency: currency
+      Assertions.valid_money frozen, currency: currency
+
+      @user = user
+      @currency = currency
+      @total = total
+      @frozen = frozen
+      @ref = ref
     end
 
     def available
