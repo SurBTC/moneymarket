@@ -22,13 +22,9 @@ module Moneymarket
       for_volume || volume
     end
 
-    def volume_required_to_collect(_source_amount)
-      Assertions.valid_money _source_amount, currency: quote_currency
-      Calculator.volume(
-        quote: _source_amount,
-        unit_price: limit,
-        unit_currency: volume.currency
-      )
+    def volume_required_to_collect(_destination_amount)
+      Assertions.valid_money _destination_amount, currency: base_currency
+      _destination_amount
     end
   end
 end
