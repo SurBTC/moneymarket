@@ -13,7 +13,8 @@ require 'moneymarket/core/market'
 require 'moneymarket/core/match'
 require 'moneymarket/core/account'
 require 'moneymarket/core/account_provider'
-require 'moneymarket/core/slope'
+require 'moneymarket/core/bid_slope'
+require 'moneymarket/core/ask_slope'
 require 'moneymarket/core/book'
 
 module Moneymarket
