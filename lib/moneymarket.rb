@@ -6,6 +6,8 @@ require 'moneymarket/utils/assertions'
 require 'moneymarket/utils/calculator'
 require 'moneymarket/utils/command'
 
+require 'moneymarket/core/event'
+require 'moneymarket/core/event_manager'
 require 'moneymarket/core/order'
 require 'moneymarket/core/bid'
 require 'moneymarket/core/ask'
