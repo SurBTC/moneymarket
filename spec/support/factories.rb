@@ -18,4 +18,8 @@ module Helpers
   def create_ask(_volume, _limit = nil, _options = {})
     create_order _volume, _limit, _options, Moneymarket::Ask
   end
+
+  def create_domain(_base, _quote, _fee = 'exchange')
+    Moneymarket::Domain.new(Moneymarket::AccountManager.new, _base, _quote, _fee)
+  end
 end
