@@ -19,6 +19,8 @@ require 'moneymarket/core/bid_slope'
 require 'moneymarket/core/ask_slope'
 require 'moneymarket/core/book'
 
+require 'moneymarket/events/balance_changed_event'
+
 module Moneymarket
   def self.book()
   end

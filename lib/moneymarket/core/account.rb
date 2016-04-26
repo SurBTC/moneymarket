@@ -17,27 +17,53 @@ module Moneymarket
       total - frozen
     end
 
-    def freeze(_amount)
+    def freeze(_amount, _reason = nil)
       Assertions.valid_money _amount, currency: currency
       raise ArgumentError, 'trying to freeze more than is available' if _amount > available
-      @frozen += _amount
+      with_event(_reason) { @frozen += _amount }
     end
 
-    def unfreeze(_amount)
+    def unfreeze(_amount, _reason = nil)
       Assertions.valid_money _amount, currency: currency
       raise ArgumentError, 'trying to unfreeze more than is frozen' if _amount > frozen
-      @frozen -= _amount
+      with_event(_reason) { @frozen -= _amount }
     end
 
-    def deposit(_amount)
+    def deposit(_amount, _reason = nil)
       Assertions.valid_money _amount, currency: currency
-      @total += _amount
+      with_event(_reason) { @total += _amount }
     end
 
-    def withdraw(_amount)
+    def spend(_amount, _reason = nil)
       Assertions.valid_money _amount, currency: currency
       raise ArgumentError, 'not enough funds to withdraw' if _amount > available
-      @total -= _amount
+      with_event(_reason) { @total -= _amount }
+    end
+
+    def spend_frozen(_amount, _reason = nil)
+      Assertions.valid_money _amount, currency: currency
+      raise ArgumentError, 'trying to unfreeze more than is frozen' if _amount > frozen
+
+      with_event(_reason) do
+        @frozen -= _amount
+        @total -= _amount
+      end
+    end
+
+    private
+
+    def with_event(_reason)
+      event = BalanceChangedEvent.new
+      event.account = self
+      event.reason = _reason
+      event.total_before = total
+      event.frozen_before = frozen
+
+      yield
+
+      event.total_after = total
+      event.frozen_after = frozen
+      EventManager.register event
     end
   end
 end
