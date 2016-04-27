@@ -27,13 +27,15 @@ module Moneymarket
       @orders.count
     end
 
-    def each_until_limit(_limit)
-      Enumerator.new do |y|
+    def each_until_limit(_limit, &_block)
+      enum = Enumerator.new do |y|
         @orders.each do |order|
           break if compare_limit(order.limit, _limit) > 0
           y << order
         end
       end
+      return enum if _block.nil?
+      enum.each(&_block)
     end
 
     private
