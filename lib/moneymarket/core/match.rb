@@ -1,6 +1,6 @@
 module Moneymarket
   class Match
-    attr_reader :market, :bid, :ask
+    attr_reader :market, :trigger, :match, :bid, :ask
     attr_accessor :volume
 
     def initialize(_trigger, _match, _volume)
