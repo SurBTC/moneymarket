@@ -19,8 +19,8 @@ module Moneymarket
       @orders.delete(_order)
     end
 
-    def each
-      @orders.each { |o| yield o }
+    def each(&_block)
+      @orders.each(&_block)
     end
 
     def count
