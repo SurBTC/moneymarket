@@ -21,16 +21,16 @@ module Moneymarket
       end
     end
 
-    attr_reader :user, :ts, :volume, :limit, :fee, :ref
+    attr_reader :user, :timestamp, :volume, :limit, :fee, :ref
 
-    def initialize(state: nil, ts: nil, volume: nil, limit: nil, fee: 0.0, user: nil, ref: nil)
+    def initialize(state: nil, timestamp: nil, volume: nil, limit: nil, fee: 0.0, user: nil, ref: nil)
       Assertions.valid_money volume
       Assertions.valid_money limit unless limit.nil?
       Assertions.valid_fee fee
 
       aasm.current_state = state unless state.nil?
       @user = user
-      @ts = ts
+      @timestamp = timestamp
       @volume = volume
       @limit = limit
       @fee = fee
