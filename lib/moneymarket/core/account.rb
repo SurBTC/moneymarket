@@ -54,7 +54,7 @@ module Moneymarket
 
     def with_event(_reason)
       event = BalanceChangedEvent.new
-      event.account = self
+      event.account = ref
       event.reason = _reason
       event.total_before = total
       event.frozen_before = frozen
