@@ -20,6 +20,7 @@ require 'moneymarket/core/ask_slope'
 require 'moneymarket/core/book'
 
 require 'moneymarket/events/balance_changed_event'
+require 'moneymarket/events/transaction_executed_event'
 
 module Moneymarket
   def self.book()
