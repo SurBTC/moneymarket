@@ -14,13 +14,13 @@ module Moneymarket
     end
 
     def fee(amount: nil, percent: nil)
-      result = (amount.cents * (percent.to_d / 100)).floor # fees always round to floor
+      result = (amount.cents * percent).floor # fees always round to floor
       Money.new result, amount.currency
     end
 
     def order_fee(order: nil, collected_amount: nil) # move this to command
       collected_amount = order.collected_amount if collected_amount.nil?
-      fee_cents = (collected_amount.cents * (order.fee.to_d / 100)).floor
+      fee_cents = (collected_amount.cents * order.fee).floor
       Money.new fee_cents, collected_amount.currency
     end
   end

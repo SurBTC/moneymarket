@@ -19,7 +19,7 @@ describe Moneymarket::Calculator do
   end
 
   describe "fee" do
-    it { expect(calculator.fee(amount: clp(10), percent: 30)).to eq(clp(3)) }
-    it { expect(calculator.fee(amount: clp(1), percent: 0.09)).to eq(clp(0)) }
+    it { expect(calculator.fee(amount: clp(10), percent: 0.3)).to eq(clp(3)) }
+    it { expect(calculator.fee(amount: clp(1), percent: 0.009)).to eq(clp(0)) }
   end
 end
