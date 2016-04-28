@@ -4,8 +4,18 @@ module Moneymarket
       @current_manager
     end
 
-    def self.register(_event)
+    def self.register(_event, &_block)
       current_manager.register _event if current_manager
+
+      if _block
+        begin
+          actual_manager = @current_manager
+          @current_manager = _event
+          _block.call
+        ensure
+          @current_manager = actual_manager
+        end
+      end
     end
 
     def initialize
